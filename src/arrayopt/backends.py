@@ -15,26 +15,28 @@ def steering_vector(Pos, scan_angle, wvlngth):
     return SV
 
 
-def local_max(input_array):
-    # will return indices of the local max and the amplitudes/values
+def local_peaks(input_array, rev=True):
+    # Returns local peak indices and corresponding values in descending/asceding order based on the values/amplitudes
     # input_array : should be a np 1 dimensional array
-    vals = []
-    indices = []
+    # rev : True -> descending order , False -> descending order
+    ret_dict = {}
+    sort_dict = {}
     for i in range(1, len(input_array)-1):
         if input_array[i-1] < input_array[i] and input_array[i] > input_array[i+1]:
-            vals.append(input_array[i])
-            indices.append(i)
+            ret_dict[i]=input_array[i]
+    
+    sort_dict = dict(sorted(ret_dict.items(), key= lambda ret_dict:ret_dict[1], reverse=rev))
+    return sort_dict
 
-    return vals, indices
-
-def local_min(input_array):
-    # will return indices of the local min and the amplitudes/values
+def local_troughs(input_array, rev=True):
+    # Returns local troughs(minimums) indices and corresponding values in descending/asceding order based on the values/amplitudes
     # input_array : should be a np 1 dimensional array
-    vals = []
-    indices = []
+    # rev : True -> descending order , False -> descending order
+    ret_dict = {}
+    sort_dict = {}
     for i in range(1, len(input_array)-1):
         if input_array[i-1] > input_array[i] and input_array[i] < input_array[i+1]:
-            vals.append(input_array[i])
-            indices.append(i)
+            ret_dict[i]=input_array[i]
 
-    return vals, indices
+    sort_dict = dict(sorted(ret_dict.items(), key= lambda ret_dict:ret_dict[1], reverse=rev))    
+    return sort_dict

@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from arrayopt.backends import local_max
-
-
+# from arrayopt.backends import local_max
+from arrayopt.backends import *
+from arrayopt.models import array_config, op_set
 a = np.array([[-2, -1, 0, 1]])
 b = np.array([[0, 1, 2, 3]])
 # a = np.arange(-2,2,1)
@@ -20,4 +20,6 @@ for i in range(1,len(c[0])-1) :
         j=j+1
 
 
-print(vals, indices)     
+array = array_config(2, 4, 11, FOVL=30, angle_step = 0.1)
+
+print(array.FOV[0])     
